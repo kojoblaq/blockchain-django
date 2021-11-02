@@ -1,0 +1,426 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karla:400,700&amp;display=swap" >
+    <link rel="stylesheet" href="/static/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <style>body{font-family: 'Karla', sans-serif;}</style>
+    
+  </head>
+  <body>
+    <div class="container">
+      <div class="card-deck ">
+        <!--first card-->
+        <div class="card col">
+          <div class="card-body">
+            <h5 class="card-title">ADD INSTITUTION</h5>
+            <p>jfdhkvhxjvxvnkjvxkvxnvjxhcvkxjbvmxvbxcn x,bvjxvbx,gbxjvbxkvbnx,</p>
+            
+          </div>
+          <div class="card-footer">
+            <button type="button" class="btn btn-primary" 
+            data-toggle = "modal" 
+            data-target= "#inst_modal">ADD</button>
+          </div>
+        </div>
+
+        <!-- Modal 1 -->
+        <div class="modal fade" id="inst_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="inst_modal">ADD INSTITUTION</h5>
+              
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+              <div class="modal-body">  
+
+                <form method="POST" action = '/fairwages/fair_home/'>
+                  
+                  {% csrf_token %}
+
+                  <main>
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label for="inputInstitution">INSTITUTION</label>
+                        <input type="text" class="form-control" name="institution" id="institution" placeholder="Enter institution">
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="inputPassword4">ALIAS</label>
+                        <input type="text" class="form-control" name= "alias" id="alias" placeholder="Enter Job Role">
+                      </div>
+                    </div>
+
+                  </main>
+                  <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Discard</button>
+                  <button type="submit" class="btn btn-primary" name="home"onclick = "Institution created successfully">submit and add another</button>
+                  <button type="submit" class="btn btn-primary" name = "inst_tution"onclick = "Institution created successfully">submit</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+       <!--Second card-->
+        <div class="card col">
+          <div class="card-body">
+            <h5 class="card-title">ADD JOB ROLE</h5>
+            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+            
+          </div>
+          <div class="card-footer">
+            <button type="button" class="btn btn-primary" 
+            data-toggle = "modal" 
+            data-target= "#job_modal">ADD</button>
+          </div>
+        </div>
+        <!-- Modal 2 -->
+        <div class="modal fade" id="job_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="job_modal">ADD JOB ROLES</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                
+              <form method="POST"  action = "/fairwages/job/">
+                
+                {% csrf_token %}
+
+                <main>
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="inputInstitution">INSTITUTION</label>
+                      
+                      <select class="form-control" name="institution" id="institution" placeholder="Enter institution">
+                       <option selected>Select Institution</option>
+                        {% for i in Inst %}    
+                                                              
+                        <option value="{{i.institution_name}}">{{i.institution_name}}</option>
+                        {% endfor %}
+                        
+                      </select>
+
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="inputPassword4">JOB ROLE</label>
+                      <input type="text" class="form-control" name= "role" id="role" placeholder="Enter ROLE">
+                    </div>
+                  </div>
+                  
+                </main>
+
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"  data-dismiss="modal">Discard</button>
+                <button type="submit" class="btn btn-primary" onclick = "Job Role created successfully" >submit and add another</button>
+                <button type="submit" class="btn btn-primary"onclick = "Job Role created successfully"name="job_role" >submit</button>
+                </div>
+              </form>
+              
+              </div>        
+            </div>
+          </div>
+        </div>
+
+
+
+        <!--tHIRD CARD-->
+
+        <div class="card col">
+          
+          <div class="card-body">
+            <h5 class="card-title">ADD STAFF</h5>
+            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+            
+          </div>
+          <div class="card-footer">
+            <button type="submit" class="btn btn-primary" 
+            data-toggle = "modal" 
+            data-target= "#staff_modal">ADD</button>
+          </div>
+        </div>
+
+        <!--Model 3-->
+        <div class="modal fade" id="staff_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="job_modal">ADD STAFF</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form method="POST" action = "/fairwages/staff/" id = "staff_form" data-staff-url = '/ajax/load-roles/'>
+                 
+                  {% csrf_token %}
+
+                  <main>
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label for="inputInstitution">STAFF NAME</label>
+                        <input type="text" class="form-control" name= "fullname" id="fullname" placeholder="Enter Full Name">
+                        <small id="HelpBlock" class="form-text text-muted">
+                            Surname | First Name | Other Names
+                        </small>                    
+                      </div>
+
+                      <div class="form-group col-md-6">
+                        <label for="inputPassword4">STAFF ID</label>
+                        <input type="text" class="form-control" name= "staffid" id="staffid" placeholder="Enter Staff ID">
+                      </div>
+                    </div>
+
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label for="inputInstitution">INSTITUTION</label>
+                        <select type="text" class="form-control" name="staff_institution" id="staff_institution" placeholder="Enter institution">
+                          <option selected>Select Institution</option>
+                        {% for i in Inst %}    
+                                                              
+                        <option value="{{i.institution_name}}">{{i.institution_name}}</option>
+                        {% endfor %}
+                        </select>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="inputPassword4">JOB ROLE</label>
+                        <select type="text" class="form-control" name="role" id="staff-role" placeholder="Enter Role">
+                          <option selected>Select Role</option>
+                        </select>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="inputPassword4">GRADE</label>
+                        <select type="text" class="form-control" name="grade" id="grade" placeholder="Enter Grade">
+                          <option selected>Select Grade</option>
+                        {% for i in gradeLevel %}    
+                                                              
+                        <option value="{{i.ss_grade_level}}">{{i.ss_grade_level}}</option>
+                        {% endfor %}
+                        </select>
+                      </div>
+                    </div>
+                    
+                  </main>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Discard</button>
+                    <button type="submit" class="btn btn-primary"onclick = "Staff Added successfully">submit and add another</button>
+                    <button type="submit" class="btn btn-primary"name="staff" onclick = "Staff Added successfully">submit</button>
+                  </div>
+
+                </form>
+              </div>  
+
+            </div>
+          </div>
+        </div>
+
+
+        <!--Fourth card-->
+        <div class="card col">    
+            <div class="card-body">
+              <h5 class="card-title">CREATE GRADE STRUCTURE</h5>
+              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+            </div>
+            <div class="card-footer">
+              <button type="submit" class="btn btn-primary" 
+              data-toggle = "modal" 
+              data-target= "#grade_modal">CREATE</button>
+            </div>
+          </div>
+        </div>
+
+        <!--Model 4-->
+        <div class="modal fade" id="grade_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="job_modal">CREATE GRADE STRUTURE</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form method="POST" action='/fairwages/grade/'  >
+                 
+                  {% csrf_token %}
+
+                  <main>
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label for="inputPassword4">STAFF ID</label>
+                        <select type="text" class="form-control" name="g_staff_id" id="g_staff_id">
+                          <option selected>Select Staff ID</option>
+                          {% for i in workers %}
+                        <option value="{{i.staff_id}}">{{i.staff_id}}</option>
+                        {% endfor %}
+                        </select>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="inputInstitution">STAFF NAME</label>
+                        
+                          <input type="text" id="g_fullname" name="g_fullname"class="form-control" placeholder="Institution">                                       
+                        
+                      </div>
+                      
+                      <div class="form-group col-md-6">
+                        <label for="inputInstitution">INSTITUTION</label>
+                        
+                          <input type="text" id="g_institution" name="g_institution" class="form-control" placeholder="Institution">                                       
+                        
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="inputPassword4">JOB ROLE</label>
+                        
+                          <input type="text" id="g_role" name="g_role"class="form-control" placeholder="Job Role">                                       
+                        
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label for="inputInstitution">GRADE</label>
+                        
+                          <input type="text" id="g_grade" name="g_grade"class="form-control" placeholder="Grade">                                       
+                        
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="inputPassword4">SALARY</label>
+                       
+                          <input type="text" id="salary" name="salary" class="form-control" placeholder="00.00">                                       
+                        
+                      </div>
+                    </div>
+                  </main>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Discard</button>
+                    <button type="submit" class="btn btn-primary"name="structure"onclick = "Grade Structure created successfully">submit and add another</button>
+                    <button type="submit" class="btn btn-primary"onclick = "Job Role created successfully">submit</button>
+                  </div>
+                </form>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+
+        <div id="messageModal"  class="modal fade bd-example-modal-lg" style="z-index:5000;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" href="#" class="close" data-dismiss="modal" aria-label=""><span>×</span></button>
+                </div>
+                <div class="modal-body">
+                    <div style="position: relative;text-align:center;color:black;">
+                        {% for message in messages %}
+                         {% if message.tag == "success" %}
+                        <h5>Success</h5>
+                        {% else %}
+                        <h5>Error</h5>
+                        {% endif %}
+                        <p>{{message}}</p>
+                        {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-danger">Close</button>
+                </div>
+            </div>
+        </div>
+</div>
+
+<a id="message" data-toggle="modal" data-target="#messageModal" href="#"></a>
+      </div>
+    </div>
+<script src="/static/js/jquery-3.4.1.min.js"></script>
+<script src="/static/js/axios.min.js"></script>
+<script src="/static/js/popper.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+{% if messages %}
+<script>
+ $("#messageModal").modal('show');
+  setTimeout(function(){
+  $("#messageModal").modal('hide');
+  }, 3000);
+</script>
+{% endif %}
+   
+    <script>
+    $("#staff_institution").change(function () {
+      var company_name = $(this).val();  // get the selected country ID from the HTML input
+     getRoles(company_name)
+
+      
+
+    });
+
+     $("#g_staff_id").change(function () {
+       console.log("changed")
+      var name = $(this).val();  // get the selected country ID from the HTML input
+     getStaff(name)
+
+    });
+
+    
+function exists(ele){if (ele !== null && ele !== undefined){return true}else{return false}}
+    var getRoles = (name) => {
+      var url = $("#staff_form").attr("data-staff-url");  // get the url of the `load_cities` view
+      console.log(url)
+    axios.get(url,{params:{staff_institution:name}})
+        .then(response => {
+            //const roles = response.data.data;
+            console.log(response.data);
+             var arr = response.data.roles;
+             $("#staff-role").empty();
+             arr.forEach(item => {
+               $("#staff-role").append(new Option( item.job_title,item.id));
+               
+             })
+          
+        })
+        .catch(error => {
+          console.log(error);
+          if (exists(error.response)){
+            console.log(error.response.data);
+          }
+          });
+};
+
+  var getStaff = (name) => {
+    axios.get('/ajax/load-staff/',{params:{staff_id:name}})
+        .then(response => {
+            //const roles = response.data.data;
+            console.log(response.data);
+             var staff = response.data.staff; 
+            $("#g_fullname").val(staff.full_name);
+            $("#g_institution").val(staff.company_name);
+            $("#g_role").val(staff.job_role);
+            $("#g_grade").val(staff.grade_level);
+            $("#salary").val(staff.salary);
+          
+        })
+        .catch(error => {
+          console.log(error);
+          if (exists(error.response)){
+            console.log(error.response.data);
+          }
+          });
+};
+
+        
+  </script>
+  </body>
+</html>

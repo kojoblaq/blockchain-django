@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Login</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karla:400,700&amp;display=swap" >
+  <link rel="stylesheet" href="/static/css/login.css">
+  <link rel="stylesheet" href="/static/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+  <style>body{font-family: 'Karla', sans-serif;}</style>
+  
+</head>
+<body>
+<form method="POST"  action = "/controller/home/">
+     {% if messages %}
+     {% for message in messages %}
+     <p style="text-align: center;"><b>{{message}}</b></p>
+     {% endfor %}
+     {% endif %}
+     {% csrf_token %}
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputInstitution">INSTITUTION</label>
+      <input type="text" class="form-control" id="institution" placeholder="Enter institution">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">ALIAS</label>
+      <input type="text" class="form-control" id="alias" placeholder="Enter alias">
+    </div>
+  </div>
+   <button type="submit" class="btn btn-primary">CREATE INSTITUTION</button>
+</form>
+ <script src="/static/js/jquery-3.4.1.min.js"></script>
+  <script src="/static/js/popper.min.js"></script>
+  <script src="/static/js/bootstrap.min.js"></script>
+</body>
+
+</html>
