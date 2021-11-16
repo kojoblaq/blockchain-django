@@ -54,7 +54,7 @@ class NewGradeContract extends Contract {
         return asset;
     }
 
-    async update_Grade(ctx, staff_id, new_staff_grade, new_institution,
+    async update_Grade(ctx, staff_id, new_staff_grade,
         new_job_role, new_Staff_name, new_salary) {
         const exists = await this.newGradeExists(ctx, staff_id);
         if (!exists) {
@@ -62,7 +62,7 @@ class NewGradeContract extends Contract {
         }
         const asset = {
             staff_grade: new_staff_grade,
-            institution: new_institution,
+            // institution: new_institution,
             job_role: new_job_role,
             staff_name: new_Staff_name,
             salary: new_salary

@@ -20,7 +20,9 @@
         <div class="card col">
           <div class="card-body">
             <h5 class="card-title">ADD INSTITUTION</h5>
-            <p>jfdhkvhxjvxvnkjvxkvxnvjxhcvkxjbvmxvbxcn x,bvjxvbx,gbxjvbxkvbnx,</p>
+            
+            <img class="card-img"  src="/static/images/institution.png"></img>
+            {% comment %} <p>jfdhkvhxjvxvnkjvxkvxnvjxhcvkxjbvmxvbxcn x,bvjxvbx,gbxjvbxkvbnx,</p> {% endcomment %}
             
           </div>
           <div class="card-footer">
@@ -76,7 +78,9 @@
         <div class="card col">
           <div class="card-body">
             <h5 class="card-title">ADD JOB ROLE</h5>
-            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+             
+            <img class="card-img"  src="/static/images/job.png"></img>
+            {% comment %} <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p> {% endcomment %}
             
           </div>
           <div class="card-footer">
@@ -144,7 +148,10 @@
           
           <div class="card-body">
             <h5 class="card-title">ADD STAFF</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+             
+            <img class="card-img" src="/static/images/staff.png"></img>
+            
+            {% comment %} <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p> {% endcomment %}
             
           </div>
           <div class="card-footer">
@@ -233,7 +240,8 @@
         <div class="card col">    
             <div class="card-body">
               <h5 class="card-title">CREATE GRADE STRUCTURE</h5>
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+              
+              <img class="card-img" src="/static/images/grade.png"></img>
             </div>
             <div class="card-footer">
               <button type="submit" class="btn btn-primary" 
@@ -326,9 +334,9 @@
                     <div style="position: relative;text-align:center;color:black;">
                         {% for message in messages %}
                          {% if message.tag == "success" %}
-                        <h5>Success</h5>
+                        <h5></h5>
                         {% else %}
-                        <h5>Error</h5>
+                        <h5></h5>
                         {% endif %}
                         <p>{{message}}</p>
                         {% endfor %}
@@ -354,7 +362,7 @@
  $("#messageModal").modal('show');
   setTimeout(function(){
   $("#messageModal").modal('hide');
-  }, 3000);
+  }, 1000);
 </script>
 {% endif %}
    
@@ -369,7 +377,7 @@
 
      $("#g_staff_id").change(function () {
        console.log("changed")
-      var name = $(this).val();  // get the selected country ID from the HTML input
+      var name = $(this).val();  // get the selected staff ID from the HTML input
      getStaff(name)
 
     });

@@ -9,4 +9,6 @@ from django.contrib import messages
 
 # Create your views here.
 def home(request):
-    return HttpResponse('<h1>Minstry HOME</h1>')  
+    template = "ministry_home.html"
+    
+    return render(request,template)
