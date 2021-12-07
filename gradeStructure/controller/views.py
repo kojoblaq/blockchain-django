@@ -10,6 +10,6 @@ from django.contrib import messages
 # Create your views here.
 
 def home(request):
-    template = "ministry_home.html"
+    template = "basetemp.html"
     
     return render(request,template)

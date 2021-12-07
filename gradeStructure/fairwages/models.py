@@ -1,12 +1,15 @@
 from django.db import models
 from django.db.models.deletion import CASCADE
 from django.db.models.fields.related import ForeignKey
+from django.contrib.auth.models import User
+from gradeStructure.settings import AUTH_USER_MODEL
+
 
 # Create your models here.
 
 class Institution(models.Model):
-    institution_name = models.CharField(max_length=1000, null= False)
-    aliase = models.CharField(max_length=100)
+    institution_name = models.CharField(max_length=500, null= False)
+    aliase = models.CharField(max_length=10)
     def __str__(self):
         return self.institution_name
     
@@ -60,7 +63,7 @@ class Grade (models.Model):
     
 class Staff(models.Model):
     fullname = models.CharField(max_length=1000, null= False)
-    staff_id = models.IntegerField(null=False, blank=False)
+    staff_id = models.IntegerField(null=True, blank=False)
     job_role = models.ForeignKey(JobRole, on_delete=CASCADE, related_name = "role")
     grade_level = models.ForeignKey(Grade, on_delete=CASCADE, related_name="s_grade_level")
     company_name = models.ForeignKey(Institution, on_delete=CASCADE, related_name = "company_n")
@@ -71,14 +74,20 @@ class Staff(models.Model):
 
     
 class GradeStructure (models.Model):
+    GSTATUS = [
+        ('Pending','Pending'),
+        ('Approved','Approved'),
+        ('Declined','Declined'),
+    ]
     name = models.ForeignKey(Institution, on_delete=CASCADE, related_name="name_of_inst")
     job_t = models.ForeignKey(JobRole, on_delete=CASCADE, related_name="title")
     ss_grade = models.ForeignKey(Grade,on_delete=CASCADE, related_name="g_level")
     id_staf = models.ForeignKey(Staff, on_delete=CASCADE, related_name="identity")
     staff_fname = models.ForeignKey(Staff, on_delete=CASCADE, related_name="fname")
-    # submission_date = models.DateTimeField(null = False)
-    # creator = models.CharField(max_length=100, null= False) 
+    status = models.CharField(max_length=200, null=True, blank=True, choices=GSTATUS, default='Pending')
+    submission_date = models.DateTimeField(auto_now_add=True)
+    creator = models.ForeignKey(AUTH_USER_MODEL, on_delete=CASCADE) 
     salary = models.ForeignKey(Grade, on_delete=CASCADE, related_name="wage")
-    # def __str__(self):
-    #     return self.staff_fname
+    def __str__(self):
+        return self.creator
     

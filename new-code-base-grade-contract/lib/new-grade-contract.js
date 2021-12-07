@@ -14,26 +14,20 @@ class NewGradeContract extends Contract {
 
     async create_Grade(ctx, staff_id, staff_grade, institution,
         job_role, Staff_name, salary) {
-        const exists = await this.Grade_Exists(ctx, staff_id);
+        const exists = await this.GradeExists(ctx, staff_id);
         if (exists) {
             throw new Error(`The new grade ${staff_id} already exists`);
         }
 
         const asset = {
-            staff_grade
-
+            staff_grade,
+            institution,
+            job_role,
+            Staff_name,
+            salary
         };
-        const s_institution = {
-            institution
-        };
-        const s_role = {
-            job_role
-        };
-        const s_fname = {
-            Staff_name
-        };
-        const s_salary = { salary };
-        const buffer = Buffer.from(JSON.stringify(asset, s_institution, s_role, s_fname, s_salary));
+        
+        const buffer = Buffer.from(JSON.stringify(asset));
         await ctx.stub.putState(staff_id, buffer);
     }
 
@@ -45,7 +39,7 @@ class NewGradeContract extends Contract {
 
 
     async read_Grade(ctx, staff_id) {
-        const exists = await this.newGradeExists(ctx, staff_id);
+        const exists = await this.GradeExists(ctx, staff_id);
         if (!exists) {
             throw new Error(`The grade for ${staff_id} does not exist`);
         }
@@ -56,13 +50,13 @@ class NewGradeContract extends Contract {
 
     async update_Grade(ctx, staff_id, new_staff_grade,
         new_job_role, new_Staff_name, new_salary) {
-        const exists = await this.newGradeExists(ctx, staff_id);
+        const exists = await this.GradeExists(ctx, staff_id);
         if (!exists) {
             throw new Error(`The grade for ${staff_id} does not exis`);
         }
         const asset = {
             staff_grade: new_staff_grade,
-            // institution: new_institution,
+            institution: new_institution,
             job_role: new_job_role,
             staff_name: new_Staff_name,
             salary: new_salary
@@ -72,7 +66,7 @@ class NewGradeContract extends Contract {
     }
 
     async deleteNewGrade(ctx, staff_id) {
-        const exists = await this.newGradeExists(ctx, staff_id);
+        const exists = await this.GradeExists(ctx, staff_id);
         if (!exists) {
             throw new Error(`The grade for ${staff_id} does not exist`);
         }

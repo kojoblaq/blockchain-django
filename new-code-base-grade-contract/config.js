@@ -1,6 +1,3 @@
-/*jshint esversion: 8 */
-/* jshint -W097 */
-/* jshint node: true */
 'use strict';
 const env = process.env;
 

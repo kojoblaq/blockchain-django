@@ -13,14 +13,16 @@
     "test": "nyc mocha --recursive",
     "start": "fabric-chaincode-node start"
   },
-  "engineStrict": true,
+  "engineStrict": false,
   "author": "John Doe",
   "license": "Apache-2.0",
   "dependencies": {
-    "better-sqlite3": "^7.4.4",
+    "better-sqlite3": "^7.4.5",
+    "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "fabric-contract-api": "^2.2.0",
     "fabric-shim": "^2.2.0",
+    "md5": "^2.3.0",
     "sqlite3": "^5.0.2"
   },
   "devDependencies": {

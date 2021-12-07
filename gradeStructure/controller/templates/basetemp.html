@@ -1,0 +1,355 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <title>MyComm | Dashboard</title>
+    <link rel="icon" href="" type="image/png" sizes="16x16" />
+    
+    <!-- stylesheet -->
+    
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karla:400,700&amp;display=swap" > -->
+    <link rel="stylesheet" href="/static/controller_asset/css/main.min.css">  
+    <link rel="stylesheet" href="/static/controller_asset/css/style.css" />
+    <link rel="stylesheet" href="/static/controller_asset/css/bootstrap.css" />
+    <link rel="stylesheet" href="/static/controller_asset/css/main.css" />
+
+  </head>
+  <body>
+    <header class="">
+      <div class="topbar stick">
+        <a href = '/'>
+          <div class="logo">
+            <img alt="" src="/static/controller_asset/images/job.png"/>
+            <span>MINISTRY OF FINANCE</span>
+          </div>
+        </a>  
+        <!-- <div class="searches"> -->
+          <ul class="web-elements">
+            <li>
+              <a
+                class="mesg-notif"
+                href="#"
+                title="Messages"
+                data-toggle="tooltip"
+              >
+              <i>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="feather feather-message-square"
+                >
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+              </i>
+              </a>
+            </li>
+
+            <li>
+              <a
+                class="mesg-notif"
+                href="#"
+                title="Notifications"
+                data-toggle="tooltip"
+              >
+              <i>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="feather feather-bell"
+                >
+                  <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                  <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                </svg>
+              </i>
+              </a>
+            </li>
+
+            <li>
+              <a class="create" href="#" title="Add New" data-toggle="tooltip">
+                <i>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="feather feather-plus"
+                  >
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                  </svg>
+                </i>
+              </a>
+            </li>
+          </ul>
+        <!-- </div> -->
+      </div>
+    </header>
+    <div class="top-sub-bar">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="page-title">
+              <h4>Dashboard</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- top sub bar -->
+    <nav class="sidebar">
+      <ul class="menu-slide">
+        <li class="active">
+          <a class="" href="#" title="">
+            <i>
+              <svg
+                id="icon-home"
+                class="feather feather-home"
+                stroke-linejoin="round"
+                stroke-linecap="round"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                viewBox="0 0 24 24"
+                height="14"
+                width="14"
+                xmlns="../../../www.w3.org/2000/svg.html"
+              >
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                <polyline points="9 22 9 12 15 12 15 22" />
+              </svg>
+            </i>
+            Dashboard
+          </a>
+        </li>
+        <li>
+          <a class="" href="#" title="">
+            <i
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="feather feather-message-square"
+              >
+                <path
+                  d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+                ></path>
+              </svg>
+            </i>
+            Pending Grades
+            <span class="prod-rating">1</span>
+          </a>
+        </li>
+        <li>
+          <a class="" href="#" title="">
+            <i
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="feather feather-message-circle"
+              >
+                <path
+                  d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"
+                ></path>
+              </svg>
+            </i>
+            Approved Grades
+            <span class="prod-rating">1</span>
+          </a>
+        </li>
+        <li>
+          <a class="" href="#" title="">
+            <i
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="feather feather-power"
+              >
+                <path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path>
+                <line x1="12" y1="2" x2="12" y2="12"></line>
+              </svg>
+            </i>
+            Logout
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <!-- sidebar -->
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="panel-content">
+            <h4 class="main-title">Grades</h4>
+            <div class="row merged20 mb-4">
+              <div class="col-lg-4 col-md-4 col-sm-4">
+                <div class="d-widget soft-red">
+                  <div class="d-widget-title">
+                    <h5>PENDING GRADES</h5>
+                  </div>
+                  <div class="d-widget-content">
+                    <span class="realtime-ico pulse"></span>
+                    <h6>Updating live</h6>
+                    <!-- ADD THE CODE TO UPDATE -->
+                    <h5>223</h5>
+                    <i class="icofont-users-alt-3"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-4">
+                <div class="d-widget soft-blue">
+                  <div class="d-widget-title">
+                    <h5>APPROVED GRADES</h5>
+                  </div>
+                  <div class="d-widget-content">
+                    <span class="realtime-ico pulse"></span>
+                    <h6>Updating live</h6>
+                    <h5>5016</h5>
+                    <i class="icofont-optic"></i>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="col-lg-4 col-md-4 col-sm-4">
+                <div class="d-widget soft-green">
+                  <div class="d-widget-title">
+                    <h5>Realtime Posts</h5>
+                  </div>
+                  <div class="d-widget-content">
+                    <span class="realtime-ico pulse"></span>
+                    <h6>Updating live</h6>
+                    <h5>5.3K</h5>
+                    <i class="icofont-computer"></i>
+                  </div>
+                </div>
+              </div> -->
+            </div>
+            
+            <div class="row merged20 mb-4">
+              <div class="col-lg-12">
+                <div class="d-widget">
+                  <div class="d-widget-title">
+                    <h5>Manage Grade Structure</h5>
+                  </div>
+                  <div class="d-widget-content">
+                    <table
+                      class="
+                        table
+                        manage-user
+                        table-default table-responsive-md
+                        table-hover
+                      "
+                    >
+                      <thead>
+                        <tr>
+                          <th>Grade ID</th>
+                          <th>Institution</th>
+                          <th>Staff ID</th>
+                          <th>Status</th>
+                          <!-- <th>Hide</th> -->
+                          <th>Delete</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>
+                            <!-- <figure>
+                              <img src="/Users/KOJO/Desktop/blockchain-project/Application/static/images/job.png" alt="" />
+                            </figure> -->
+                            <h5>Maria K.</h5>
+                          </td>
+                          <td>
+                            <a class="mini-btn" href="#" title="">view</a>
+                          </td>
+                          <td>
+                            <h5>214cs</h5>
+                            <a class="mini-btn" href="#" title="">view</a>
+                          </td>
+                          
+                          <td>
+                            <div class="switch-btn">
+                              <input
+                                type="checkbox"
+                                hidden="hidden"
+                                id="switch2" 
+                              />
+                              <label class="switch" for="switch2"></label>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="actions-btn">
+                              <span class="iconbox button soft-primary"
+                                ><i class="icofont-pen-alt-1"></i
+                              ></span>
+                              <span class="iconbox button soft-danger"
+                                ><i class="icofont-trash"></i
+                              ></span>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div> 
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <script src="/static/controller_asset/js/main.min.js"></script>
+    <script src="/static/controller_asset/js/bootstrap.min.js"></script>
+    <script src="/static/controller_asset/js/jquery-3.4.1.min.js"></script>
+    <script src="/static/controller_asset/js/popper.min.js"></script>
+
+
+  
+    
+  </body>
+
+
+  </html>

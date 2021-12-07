@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import *
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
 from django.http import HttpResponse, JsonResponse
@@ -10,6 +11,7 @@ import json
 
 
 # Create your views here.
+@login_required(login_url='signin')
 def home(request):
     if request.method =="GET":
         template = "fair_home.html"
