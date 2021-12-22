@@ -11,6 +11,7 @@ urlpatterns = [
 
 # path('',views.home, name="home"),
 url(r"^controller/controller_home/$",views.home, name="home"),
+url(r"^controller/pending/$",views.pendinggrades, name="pending")
 
 
 

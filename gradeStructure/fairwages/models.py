@@ -60,16 +60,21 @@ class Grade (models.Model):
                      ]
     ss_grade_level = models.CharField(max_length=3, choices=GRADE_CHOICES, null= False)
     amount = models.FloatField(null = False)
+    def __str__(self):
+        return self.ss_grade_level
     
 class Staff(models.Model):
     fullname = models.CharField(max_length=1000, null= False)
-    staff_id = models.IntegerField(null=True, blank=False)
+    staff_id = models.IntegerField(null=False, blank=False)
     job_role = models.ForeignKey(JobRole, on_delete=CASCADE, related_name = "role")
     grade_level = models.ForeignKey(Grade, on_delete=CASCADE, related_name="s_grade_level")
     company_name = models.ForeignKey(Institution, on_delete=CASCADE, related_name = "company_n")
     
     def __str__(self):
         return self.fullname
+    # def __str__(me):
+    #     return me.fullname
+
 
 
     
@@ -79,15 +84,18 @@ class GradeStructure (models.Model):
         ('Approved','Approved'),
         ('Declined','Declined'),
     ]
+    grade_id = models.AutoField(primary_key=True, null=False)
     name = models.ForeignKey(Institution, on_delete=CASCADE, related_name="name_of_inst")
     job_t = models.ForeignKey(JobRole, on_delete=CASCADE, related_name="title")
     ss_grade = models.ForeignKey(Grade,on_delete=CASCADE, related_name="g_level")
     id_staf = models.ForeignKey(Staff, on_delete=CASCADE, related_name="identity")
     staff_fname = models.ForeignKey(Staff, on_delete=CASCADE, related_name="fname")
-    status = models.CharField(max_length=200, null=True, blank=True, choices=GSTATUS, default='Pending')
+    stat = models.CharField(max_length=200, null=True, blank=True, choices=GSTATUS, default='Pending')
     submission_date = models.DateTimeField(auto_now_add=True)
-    creator = models.ForeignKey(AUTH_USER_MODEL, on_delete=CASCADE) 
+    # created_by = models.ForeignKey(AUTH_USER_MODEL, on_delete=CASCADE) 
+    # creator = models.ForeignKey(AUTH_USER_MODEL,on_delete=CASCADE,default=1)
+    who = models.CharField(max_length=50, null = False, blank= False)
     salary = models.ForeignKey(Grade, on_delete=CASCADE, related_name="wage")
     def __str__(self):
-        return self.creator
+        return self.stat
     

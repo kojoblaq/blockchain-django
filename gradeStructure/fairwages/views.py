@@ -1,14 +1,16 @@
 from django.shortcuts import render, redirect
 from .models import *
+from useraccounts.models import *
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, response
 from django.conf import settings
 from django.template.loader import render_to_string
 from django.contrib import messages
 import json
-
+import requests as r
+import datetime
 
 # Create your views here.
 @login_required(login_url='signin')
@@ -97,7 +99,8 @@ def stafff(request):
         return redirect("/fairwages/fair_home/")
     else:
         return redirect("/fairwages/fair_home/") 
-    
+      
+@login_required(login_url='signin')
 def grade(request):
     if request.method == "GET":
        template = "fair_home.html"
@@ -110,6 +113,7 @@ def grade(request):
       wage = request.POST['salary']
       s_fname = request.POST['g_fullname']
       
+      
     except Exception as e:
       messages.error(request, str(e)+" is required")
       print(str(e))
@@ -121,9 +125,11 @@ def grade(request):
         ss_grade = Grade.objects.get(ss_grade_level = grade_level)
         staff_fname = Staff.objects.get(fullname=s_fname)
         id_staf = Staff.objects.get(staff_id = staf_id)
-        salary = Grade.objects.get(amount = float(wage))
+        salary = Grade.objects.get(amount = wage)
+        by = request.user.username
+                
         try:
-          exists = GradeStructure.objects.get(name=name,job_t=job_t,ss_grade=ss_grade,staff_fname=staff_fname,id_staf=id_staf,salary=salary)
+          exists = GradeStructure.objects.get(name=name,job_t=job_t,ss_grade=ss_grade,staff_fname=staff_fname,id_staf=id_staf,salary=salary,who=by);
         except:
           g_rade = GradeStructure()
           g_rade.name = Institution.objects.get(institution_name=company_name)
@@ -131,8 +137,27 @@ def grade(request):
           g_rade.ss_grade = Grade.objects.get(ss_grade_level = grade_level)
           g_rade.staff_fname = Staff.objects.get(fullname=s_fname)
           g_rade.id_staf = Staff.objects.get(staff_id = staf_id)
-          g_rade.salary = Grade.objects.get(amount = float(wage))               
+          g_rade.salary = Grade.objects.get(amount = float(wage))
+          g_rade.who = by
           g_rade.save()
+          # api call to js api
+          url = "http://localhost:3000/create-grade"
+          params = {"staff_id":staf_id, 
+                    "staff_grade": grade_level,
+                    "institution_name":company_name, 
+                    "job_role":role,
+                    "staff_name": s_fname,
+                    "salary": float(wage),
+                    "creator": by,
+                    "status": "pending"
+                     }
+          try:
+            
+            resp = r.get(url,params=params)
+           
+          except Exception as e:  
+            print(str(e))
+          print(resp.text)
           messages.success(request,"New grade structure added!")
         else:
           messages.error(request,"This grade structure exists")

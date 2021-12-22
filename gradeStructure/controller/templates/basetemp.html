@@ -166,7 +166,7 @@
               </svg>
             </i>
             Pending Grades
-            <span class="prod-rating">1</span>
+            <span class="prod-rating pending-count">Loading...</span>
           </a>
         </li>
         <li>
@@ -190,7 +190,7 @@
               </svg>
             </i>
             Approved Grades
-            <span class="prod-rating">1</span>
+            <span class="prod-rating approved-count">Loading...</span>
           </a>
         </li>
         <li>
@@ -234,7 +234,7 @@
                     <span class="realtime-ico pulse"></span>
                     <h6>Updating live</h6>
                     <!-- ADD THE CODE TO UPDATE -->
-                    <h5>223</h5>
+                    <h5 class="pending-count">Loading...</h5>
                     <i class="icofont-users-alt-3"></i>
                   </div>
                 </div>
@@ -247,7 +247,7 @@
                   <div class="d-widget-content">
                     <span class="realtime-ico pulse"></span>
                     <h6>Updating live</h6>
-                    <h5>5016</h5>
+                    <h5 class="approved-count">Loading...</h5>
                     <i class="icofont-optic"></i>
                   </div>
                 </div>
@@ -274,7 +274,9 @@
                     <h5>Manage Grade Structure</h5>
                   </div>
                   <div class="d-widget-content">
-                    <table
+
+                    
+                    <table 
                       class="
                         table
                         manage-user
@@ -282,55 +284,31 @@
                         table-hover
                       "
                     >
+                    
                       <thead>
                         <tr>
                           <th>Grade ID</th>
-                          <th>Institution</th>
+                          <th>Institution</th>                          
+                          <th>Staff Name</th>
                           <th>Staff ID</th>
+                          <th>Grade Level</th>
+                          <th>Job Role</th>
+                          <th>Created on</th>
+                          <th>Created by</th>
                           <th>Status</th>
-                          <!-- <th>Hide</th> -->
-                          <th>Delete</th>
                         </tr>
                       </thead>
-                      <tbody>
-                        <tr>
-                          <td>
-                            <!-- <figure>
-                              <img src="/Users/KOJO/Desktop/blockchain-project/Application/static/images/job.png" alt="" />
-                            </figure> -->
-                            <h5>Maria K.</h5>
-                          </td>
-                          <td>
-                            <a class="mini-btn" href="#" title="">view</a>
-                          </td>
-                          <td>
-                            <h5>214cs</h5>
-                            <a class="mini-btn" href="#" title="">view</a>
-                          </td>
-                          
-                          <td>
-                            <div class="switch-btn">
-                              <input
-                                type="checkbox"
-                                hidden="hidden"
-                                id="switch2" 
-                              />
-                              <label class="switch" for="switch2"></label>
-                            </div>
-                          </td>
-                          <td>
-                            <div class="actions-btn">
-                              <span class="iconbox button soft-primary"
-                                ><i class="icofont-pen-alt-1"></i
-                              ></span>
-                              <span class="iconbox button soft-danger"
-                                ><i class="icofont-trash"></i
-                              ></span>
-                            </div>
-                          </td>
-                        </tr>
+                      
+                      {% comment %} {% if allgrades %} {% endcomment %}
+                    {% comment %} {% for a in allgrades  %} {% endcomment %}
+                      <tbody method="POST"
+                      action = '/controller/pending/' id="table-body">
+                       
                       </tbody>
+                      {% comment %} {% endfor %} {% endcomment %}
+                      {% comment %} {% endif %} {% endcomment %}
                     </table>
+                   
                   </div>
                 </div>
               </div>
@@ -340,11 +318,203 @@
       </div>
     </div>
 
-
-    <script src="/static/controller_asset/js/main.min.js"></script>
-    <script src="/static/controller_asset/js/bootstrap.min.js"></script>
     <script src="/static/controller_asset/js/jquery-3.4.1.min.js"></script>
     <script src="/static/controller_asset/js/popper.min.js"></script>
+    <script src="/static/js/axios.min.js"></script>
+    <script src="/static/controller_asset/js/bootstrap.min.js"></script>
+    <script src="/static/controller_asset/js/main.min.js"></script>
+    
+
+
+    <script>
+
+
+
+    function exists(ele){if (ele !== null && ele !== undefined){return true}else{return false}};
+    window.grades = {};
+    var pending_count = 0;
+    var approved_count = 0;
+    var getGrades = (name) => {
+      var url = "http://localhost:3000/get-grades"  // get the url of the `load_cities` view
+      console.log(url)
+    axios.get(url)
+        .then(response => {
+            //const roles = response.data.data;
+            console.log(response.data);
+             var arr = response.data.staf_id;
+             $("g_id").empty();
+             arr.forEach(item => {
+              $("#staff-role").append(new Option( item.staff_id));
+               
+             })
+          
+        })
+        .catch(error => {
+          console.log(error);
+          if (exists(error.response)){
+            console.log(error.response.data);
+          }
+          });
+};
+      function readGrade(){ 
+        axios.get("http://localhost:3000/get-grades").then(response => {    
+            console.log(response);
+            var d = response.data.data;
+            
+            d.forEach(item => {
+              if(item.status == "pending"){
+                pending_count ++;
+                window.grades[''+item.id] = item;
+                $("#table-body").append(
+                  constructTableItem(item)
+                ); 
+              }
+              if(item.status == "approved"){
+                  approved_count ++;
+              }
+             
+             });
+
+             //var staff = response.data.staff; 
+             $(".approved-count").html(approved_count);
+             $(".pending-count").html(pending_count);
+
+        })
+        .catch(error => {
+          console.log(error);
+          if (exists(error.response)){
+            console.log(error.response.data);
+          }
+          });
+      } 
+
+      readGrade()
+      function constructTableItem(obj){
+        var html = ` <tr id="d_id_${obj.id}">
+          <td>                            
+            <h5>${obj.id}</h5>
+          </td>
+          
+          <td>
+            <h5>${obj.institution_name}</h5>
+          </td>
+          
+          <td>
+            <h5>${obj.staff_name}</h5>                           
+          </td>
+          <td>
+            <h5>${obj.staff_id}</h5>
+          </td>
+          <td>
+            <h5>${obj.staff_grade}</h5>                            
+          </td>
+          <td>
+            <h5>${obj.job_role}</h5>                          
+          </td>
+          <td>
+            <h5>${obj.created_at}</h5>                           
+          </td>
+          <td>
+            <h5>${obj.creator}</h5>
+          </td>  
+          <td >
+            <div class="actions-btn" >
+              <button onclick="approveGrade('${obj.id}')" id="a-btn-${obj.id}">
+                <span class="iconbox button soft-primary"
+                      data-toggle="tooltip" 
+                      data-placement="top" 
+                      title="Approve"><i class="icofont-check" 
+                  ></i>Approve
+                </span>
+              </button>
+
+              <button onclick="declineGrade('${obj.id}')" id="d-btn-${obj.id}">
+                <span class="iconbox button soft-danger"
+                      data-toggle="tooltip" 
+                      data-placement="top" 
+                      title="Decline"><i class="icofont-not-allowed" 
+                  ></i>Decline
+                </span>
+              </button>
+            </div>
+          </td>
+        </tr>`;
+
+        return html;
+      }
+
+      function approveGrade(id){
+        $("#a-btn-"+id).html("Please wait...");
+        var obj = window.grades[''+id];
+        const params = new URLSearchParams({
+          ss_grade : obj.staff_grade,
+          inst_name : obj.institution_name,
+          job_t: obj.job_role,
+          staffName : obj.staff_name,
+          status : "approved",
+          creator : obj.creator,
+          salary : obj.salary,
+          staffId : obj.staff_id
+          
+        }).toString();
+
+        const url =
+          "http://localhost:3000/update-grade?" +
+          params;
+        axios.get(url).then(response => {    
+          console.log(response);
+          if(response.data.data.changes == 1){
+            $("#d_id_"+id).remove();
+            approved_count ++;
+            $(".approved-count").html(approved_count);
+            pending_count --;
+            $(".pending-count").html(pending_count);
+          }
+      })
+      .catch(error => {
+        console.log(error);
+        if (exists(error.response)){
+          console.log(error.response.data);
+        }
+        });
+      }
+
+      function declineGrade(id){
+        $("#d-btn-"+id).html("Please wait...");
+        var obj = window.grades[''+id];
+        const params = new URLSearchParams({
+          ss_grade : obj.staff_grade,
+          inst_name : obj.institution_name,
+          job_t: obj.job_role,
+          staffName : obj.staff_name,
+          status : "declined",
+          creator : obj.creator,
+          salary : obj.salary,
+          staffId : obj.staff_id
+          
+        }).toString();
+
+        const url =
+          "http://localhost:3000/update-grade?" +
+          params;
+        axios.get(url).then(response => {    
+          console.log(response);
+          if(response.data.data.changes == 1){
+            pending_count --;
+            $("#pending-count").html(pending_count);
+            $("#d_id_"+id).remove();
+          }
+      })
+      .catch(error => {
+        console.log(error);
+        if (exists(error.response)){
+          console.log(error.response.data);
+        }
+        });
+      }
+
+
+    </script>
 
 
   

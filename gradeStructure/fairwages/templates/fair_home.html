@@ -427,6 +427,28 @@ function exists(ele){if (ele !== null && ele !== undefined){return true}else{ret
           }
           });
 };
+// if the person submits(listen for form submit), create form object from the values like say: var form = {staff_id:$("#g_staff_d").val(),...}
+// createGrade(form);
+{% comment %} function createGrade(form){
+  axios.get('localhost:3000/create-grade',{params:form})
+  .then(response => {
+      //const roles = response.data.data;
+      console.log(response.data);
+       var staff = response.data.staff; 
+      $("#g_fullname").val(staff.full_name);
+      $("#g_institution").val(staff.company_name);
+      $("#g_role").val(staff.job_role);
+      $("#g_grade").val(staff.grade_level);
+      $("#salary").val(staff.salary);
+    
+  })
+  .catch(error => {
+    console.log(error);
+    if (exists(error.response)){
+      console.log(error.response.data);
+    }
+    });
+} {% endcomment %}
 
         
   </script>
